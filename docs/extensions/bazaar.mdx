@@ -56,7 +56,21 @@ EXTENSION-RESPONSES: eyJiYXphYXIiOnsic3RhdHVzIjoicmVqZWN0ZWQiLCJyZWplY3RlZFJlYXN
 ```
 *(base64 of `{"bazaar":{"status":"rejected","rejectedReason":"info failed schema validation"}}`)*
 
-Clients that understand the `bazaar` extension should read the `bazaar` key of this header to confirm cataloging succeeded and surface any rejection reason for debugging.
+The x402 SDK automatically reads and logs this header on every verify and settle response. Allowlisted fields (`status`, `rejectedReason`, `reason`, `code`) are extracted and emitted to the logger without being attached to the `VerifyResponse` or `SettleResponse` objects.
+
+**TypeScript** logs via `console.log`:
+```
+[x402] extension responses: {"bazaar":{"status":"success"}}
+```
+
+**Python** logs via the `x402` logger at `INFO` level:
+```
+[x402] extension responses: {"bazaar": {"status": "rejected", "rejectedReason": "info failed schema validation"}}
+```
+
+**Go** logs via the standard logger.
+
+Malformed or missing headers are silently ignored. No action is required in your application code to read this header — the SDK handles it automatically.
 
 #### Basic Flow
 
