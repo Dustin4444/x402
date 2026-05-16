@@ -34,7 +34,6 @@ from ..exact.eip3009_utils import (
     diagnose_eip3009_simulation_failure,
     execute_transfer_with_authorization,
     parse_eip3009_authorization,
-    parse_eip3009_transfer_error,
     simulate_eip3009_transfer,
 )
 from ..exact.permit2_utils import settle_permit2, verify_permit2
@@ -380,7 +379,7 @@ class ExactEvmScheme:
         except Exception as e:
             return SettleResponse(
                 success=False,
-                error_reason=parse_eip3009_transfer_error(e),
+                error_reason=ERR_TRANSACTION_FAILED,
                 error_message=str(e),
                 network=network,
                 payer=payer,

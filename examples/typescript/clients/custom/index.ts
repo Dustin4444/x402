@@ -9,7 +9,6 @@ import {
   encodePaymentSignatureHeader,
 } from "@x402/core/http";
 import { ExactEvmScheme } from "@x402/evm/exact/client";
-import { UptoEvmScheme } from "@x402/evm/upto/client";
 import { ExactSvmScheme } from "@x402/svm/exact/client";
 import type { PaymentRequirements } from "@x402/core/types";
 
@@ -122,7 +121,6 @@ async function main(): Promise<void> {
 
   const client = new x402Client(selectPayment)
     .register("eip155:*", new ExactEvmScheme(evmSigner))
-    .register("eip155:*", new UptoEvmScheme(evmSigner))
     .register("solana:*", new ExactSvmScheme(solanaSigner));
   console.log("✅ Client ready\n");
 

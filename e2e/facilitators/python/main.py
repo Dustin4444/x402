@@ -38,7 +38,6 @@ from x402.extensions.erc20_approval_gas_sponsoring import (
 from x402.mechanisms.evm import FacilitatorWeb3Signer
 from x402.mechanisms.evm.constants import TX_STATUS_SUCCESS
 from x402.mechanisms.evm.exact import register_exact_evm_facilitator
-from x402.mechanisms.evm.upto import UptoEvmFacilitatorScheme
 from x402.mechanisms.evm.types import TransactionReceipt
 from x402.mechanisms.svm import FacilitatorKeypairSigner
 from x402.mechanisms.svm.exact import register_exact_svm_facilitator
@@ -195,26 +194,19 @@ facilitator = (
     .on_settle_failure(lambda ctx: print("Settle failure", ctx))
 )
 
-# Network configuration (from env or defaults)
-evm_network = os.environ.get("EVM_NETWORK", "eip155:84532") # Base Sepolia
-
 # Register EVM schemes (V1 and V2)
 register_exact_evm_facilitator(
     facilitator,
     evm_signer,
-    networks=evm_network,
+    networks="eip155:84532",  # Base Sepolia
     deploy_erc4337_with_eip6492=True,
 )
 
-# Register upto EVM scheme (V2 only)
-facilitator.register([evm_network], UptoEvmFacilitatorScheme(evm_signer))
-
 # Register SVM schemes (V1 and V2)
-svm_network = os.environ.get("SVM_NETWORK", "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1")
 register_exact_svm_facilitator(
     facilitator,
     svm_signer,
-    networks=svm_network,
+    networks="solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1",  # Devnet
 )
 
 # Register gas sponsoring extensions
@@ -371,7 +363,7 @@ async def health():
     """Health check endpoint."""
     return {
         "status": "ok",
-        "network": evm_network,
+        "network": "eip155:84532",
         "facilitator": "python",
         "version": "2.0.0",
         "extensions": facilitator.get_extensions(),

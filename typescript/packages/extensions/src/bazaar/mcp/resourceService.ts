@@ -68,9 +68,7 @@ export function createMcpDiscoveryExtension({
               ? {
                   transport: {
                     type: "string" as const,
-                    ...(transport === "streamable-http" || transport === "sse"
-                      ? { enum: [transport] }
-                      : {}),
+                    enum: ["streamable-http", "sse"],
                   },
                 }
               : {}),

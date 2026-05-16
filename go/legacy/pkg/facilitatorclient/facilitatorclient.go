@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/x402-foundation/x402/go/pkg/types"
+	"github.com/coinbase/x402/go/pkg/types"
 )
 
 // DefaultFacilitatorURL is the default URL for the x402 facilitator service

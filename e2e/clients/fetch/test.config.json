@@ -5,7 +5,6 @@
   "protocolFamilies": [
     "evm",
     "svm",
-    "avm",
     "aptos",
     "stellar"
   ],
@@ -32,7 +31,6 @@
       "ENDPOINT_PATH"
     ],
     "optional": [
-      "AVM_PRIVATE_KEY",
       "APTOS_PRIVATE_KEY",
       "STELLAR_PRIVATE_KEY"
     ]

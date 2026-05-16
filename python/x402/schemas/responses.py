@@ -70,7 +70,6 @@ class SettleResponse(BaseX402Model):
     payer: str | None = None
     transaction: str
     network: Network
-    amount: str | None = None
 
 
 class SupportedKind(BaseX402Model):

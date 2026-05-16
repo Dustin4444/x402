@@ -13,7 +13,6 @@ import * as Errors from "./errors";
 import {
   diagnoseEip3009SimulationFailure,
   executeTransferWithAuthorization,
-  parseEip3009TransferError,
   simulateEip3009Transfer,
 } from "./eip3009-utils";
 
@@ -319,10 +318,10 @@ export async function settleEIP3009(
       network: payload.accepted.network,
       payer,
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
-      errorReason: parseEip3009TransferError(error),
+      errorReason: Errors.ErrTransactionFailed,
       transaction: "",
       network: payload.accepted.network,
       payer,

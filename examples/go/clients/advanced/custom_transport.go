@@ -6,11 +6,10 @@ import (
 	"net/http"
 	"time"
 
-	x402 "github.com/x402-foundation/x402/go"
-	x402http "github.com/x402-foundation/x402/go/http"
-	exactevm "github.com/x402-foundation/x402/go/mechanisms/evm/exact/client"
-	uptoevm "github.com/x402-foundation/x402/go/mechanisms/evm/upto/client"
-	evmsigners "github.com/x402-foundation/x402/go/signers/evm"
+	x402 "github.com/coinbase/x402/go"
+	x402http "github.com/coinbase/x402/go/http"
+	evm "github.com/coinbase/x402/go/mechanisms/evm/exact/client"
+	evmsigners "github.com/coinbase/x402/go/signers/evm"
 )
 
 /**
@@ -91,8 +90,7 @@ func runCustomTransportExample(ctx context.Context, evmPrivateKey, url string) e
 
 	// Create x402 client
 	client := x402.Newx402Client().
-		Register("eip155:*", exactevm.NewExactEvmScheme(evmSigner, nil)).
-		Register("eip155:*", uptoevm.NewUptoEvmScheme(evmSigner, nil))
+		Register("eip155:*", evm.NewExactEvmScheme(evmSigner, nil))
 
 	httpClient := x402http.Newx402HTTPClient(client)
 
@@ -143,3 +141,4 @@ func runCustomTransportExample(ctx context.Context, evmPrivateKey, url string) e
 	printPaymentDetails(resp.Header)
 	return nil
 }
+

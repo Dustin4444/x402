@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/x402-foundation/x402/go/types"
+	"github.com/coinbase/x402/go/types"
 )
 
 // Mock V1 client for testing

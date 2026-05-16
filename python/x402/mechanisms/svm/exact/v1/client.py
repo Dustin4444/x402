@@ -22,7 +22,6 @@ from ...constants import (
     COMPUTE_BUDGET_PROGRAM_ADDRESS,
     DEFAULT_COMPUTE_UNIT_LIMIT,
     DEFAULT_COMPUTE_UNIT_PRICE_MICROLAMPORTS,
-    MAX_MEMO_BYTES,
     MEMO_PROGRAM_ADDRESS,
     NETWORK_CONFIGS,
     SCHEME_EXACT,
@@ -179,18 +178,11 @@ class ExactSvmSchemeV1:
             data=transfer_data,
         )
 
-        # Memo instruction: use seller-defined memo from extra.memo, or random nonce for uniqueness
-        seller_memo = extra.get("memo")
-        if seller_memo and isinstance(seller_memo, str):
-            memo_data = seller_memo.encode("utf-8")
-            if len(memo_data) > MAX_MEMO_BYTES:
-                raise ValueError(f"extra.memo exceeds maximum {MAX_MEMO_BYTES} bytes")
-        else:
-            memo_data = binascii.hexlify(os.urandom(16))
+        # Memo with random nonce for uniqueness (empty accounts - SPL Memo doesn't require signers)
         memo_ix = Instruction(
             program_id=Pubkey.from_string(MEMO_PROGRAM_ADDRESS),
             accounts=[],
-            data=memo_data,
+            data=binascii.hexlify(os.urandom(16)),
         )
 
         # Get latest blockhash

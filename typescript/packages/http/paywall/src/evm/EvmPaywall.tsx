@@ -49,7 +49,6 @@ export function EvmPaywall({ paymentRequired, onSuccessfulResponse }: EvmPaywall
   }
 
   const network = firstRequirement.network;
-  const tokenName = (firstRequirement.extra?.name as string) || "Token";
   const chainName = getNetworkDisplayName(network);
   const testnet = isTestnetNetwork(network);
 
@@ -139,11 +138,11 @@ export function EvmPaywall({ paymentRequired, onSuccessfulResponse }: EvmPaywall
     setIsPaying(true);
 
     try {
-      setStatus("Checking balance...");
+      setStatus("Checking USDC balance...");
       const balance = await getUSDCBalance(publicClient, address);
 
       if (balance === 0n) {
-        throw new Error(`Insufficient balance. Make sure you have ${tokenName} on ${chainName}`);
+        throw new Error(`Insufficient balance. Make sure you have USDC on ${chainName}`);
       }
 
       setStatus("Creating payment signature...");
@@ -197,11 +196,11 @@ export function EvmPaywall({ paymentRequired, onSuccessfulResponse }: EvmPaywall
         <h1 className="title">Payment Required</h1>
         <p>
           {paymentRequired.resource?.description && `${paymentRequired.resource.description}.`} To
-          access this content, please pay ${amount} {tokenName}.
+          access this content, please pay ${amount} {chainName} USDC.
         </p>
         {testnet && (
           <p className="instructions">
-            Need {tokenName} on {chainName}?{" "}
+            Need {chainName} USDC?{" "}
             <a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer">
               Get some <u>here</u>.
             </a>
@@ -260,16 +259,14 @@ export function EvmPaywall({ paymentRequired, onSuccessfulResponse }: EvmPaywall
                 <span className="payment-value">
                   <button className="balance-button" onClick={() => setHideBalance(prev => !prev)}>
                     {formattedUsdcBalance && !hideBalance
-                      ? `$${formattedUsdcBalance} ${tokenName}`
-                      : `••••• ${tokenName}`}
+                      ? `$${formattedUsdcBalance} USDC`
+                      : "••••• USDC"}
                   </button>
                 </span>
               </div>
               <div className="payment-row">
                 <span className="payment-label">Amount:</span>
-                <span className="payment-value">
-                  ${amount} {tokenName}
-                </span>
+                <span className="payment-value">${amount} USDC</span>
               </div>
               <div className="payment-row">
                 <span className="payment-label">Network:</span>

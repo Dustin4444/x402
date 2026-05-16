@@ -15,4 +15,3 @@ export type {
 // Re-export network handlers for convenience
 export { evmPaywall } from "./evm";
 export { svmPaywall } from "./svm";
-export { avmPaywall } from "./avm";

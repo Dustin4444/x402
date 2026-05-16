@@ -7,10 +7,10 @@ import (
 	"regexp"
 	"strings"
 
-	x402 "github.com/x402-foundation/x402/go"
-	"github.com/x402-foundation/x402/go/extensions/types"
-	v1 "github.com/x402-foundation/x402/go/extensions/v1"
-	x402types "github.com/x402-foundation/x402/go/types"
+	x402 "github.com/coinbase/x402/go"
+	"github.com/coinbase/x402/go/extensions/types"
+	v1 "github.com/coinbase/x402/go/extensions/v1"
+	x402types "github.com/coinbase/x402/go/types"
 	"github.com/xeipuuv/gojsonschema"
 )
 
@@ -91,7 +91,6 @@ func ValidateDiscoveryExtension(extension types.DiscoveryExtension) ValidationRe
 type DiscoveredResource struct {
 	ResourceURL   string
 	Method        string
-	ToolName      string
 	X402Version   int
 	DiscoveryInfo *types.DiscoveryInfo
 	Description   string
@@ -225,20 +224,17 @@ func ExtractDiscoveredResourceFromPaymentPayload(
 		return nil, nil
 	}
 
-	// Extract method or toolName from discovery info
-	method := ""
-	toolName := ""
+	// Extract method from discovery info
+	method := "UNKNOWN"
 	switch input := discoveryInfo.Input.(type) {
 	case types.QueryInput:
 		method = string(input.Method)
 	case types.BodyInput:
 		method = string(input.Method)
-	case types.McpInput:
-		toolName = input.ToolName
 	}
 
-	if method == "" && toolName == "" {
-		return nil, fmt.Errorf("failed to extract method/toolName from discovery info")
+	if method == "UNKNOWN" {
+		return nil, fmt.Errorf("failed to extract method from discovery info")
 	}
 
 	normalizedURL := normalizeResourceURL(resourceURL, routeTemplate)
@@ -248,7 +244,6 @@ func ExtractDiscoveredResourceFromPaymentPayload(
 		Description:   description,
 		MimeType:      mimeType,
 		Method:        method,
-		ToolName:      toolName,
 		X402Version:   version,
 		DiscoveryInfo: discoveryInfo,
 		RouteTemplate: routeTemplate,
@@ -453,20 +448,17 @@ func ExtractDiscoveredResourceFromPaymentRequired(
 		return nil, nil
 	}
 
-	// Extract method or toolName from discovery info
-	method := ""
-	toolName := ""
+	// Extract method from discovery info
+	method := "UNKNOWN"
 	switch input := discoveryInfo.Input.(type) {
 	case types.QueryInput:
 		method = string(input.Method)
 	case types.BodyInput:
 		method = string(input.Method)
-	case types.McpInput:
-		toolName = input.ToolName
 	}
 
-	if method == "" && toolName == "" {
-		return nil, fmt.Errorf("failed to extract method/toolName from discovery info")
+	if method == "UNKNOWN" {
+		return nil, fmt.Errorf("failed to extract method from discovery info")
 	}
 
 	normalizedURL := normalizeResourceURL(resourceURL, routeTemplate)
@@ -476,7 +468,6 @@ func ExtractDiscoveredResourceFromPaymentRequired(
 		Description:   description,
 		MimeType:      mimeType,
 		Method:        method,
-		ToolName:      toolName,
 		X402Version:   version,
 		DiscoveryInfo: discoveryInfo,
 		RouteTemplate: routeTemplate,

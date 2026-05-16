@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
+	x402 "github.com/coinbase/x402/go"
 	"github.com/joho/godotenv"
-	x402 "github.com/x402-foundation/x402/go"
 )
 
 /**
@@ -48,7 +48,6 @@ func main() {
 	}
 
 	svmPrivateKey := os.Getenv("SVM_PRIVATE_KEY")
-	evmRpcURL := os.Getenv("EVM_RPC_URL")
 
 	url := os.Getenv("SERVER_URL")
 	if url == "" {
@@ -61,9 +60,9 @@ func main() {
 
 	switch pattern {
 	case "builder-pattern":
-		client, err = createBuilderPatternClient(evmPrivateKey, svmPrivateKey, evmRpcURL)
+		client, err = createBuilderPatternClient(evmPrivateKey, svmPrivateKey)
 	case "mechanism-helper-registration":
-		client, err = createMechanismHelperRegistrationClient(evmPrivateKey, svmPrivateKey, evmRpcURL)
+		client, err = createMechanismHelperRegistrationClient(evmPrivateKey, svmPrivateKey)
 	default:
 		fmt.Printf("❌ Unknown pattern: %s\n", pattern)
 		fmt.Println("Available patterns: builder-pattern, mechanism-helper-registration")
@@ -136,3 +135,4 @@ func makeRequest(client *x402.X402Client, url string) error {
 
 	return nil
 }
+

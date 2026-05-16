@@ -21,5 +21,4 @@ const (
 	ErrFailedToCreateTransaction    = "invalid_exact_solana_client_failed_to_create_transaction"
 	ErrFailedToSignTransaction      = "invalid_exact_solana_client_failed_to_sign_transaction"
 	ErrFailedToEncodeTransaction    = "invalid_exact_solana_client_failed_to_encode_transaction"
-	ErrMemoExceedsMaxSize           = "invalid_exact_solana_client_memo_exceeds_max_size"
 )

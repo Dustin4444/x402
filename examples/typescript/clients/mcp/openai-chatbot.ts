@@ -18,7 +18,6 @@
 import { config } from "dotenv";
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 import { ExactEvmScheme } from "@x402/evm/exact/client";
-import { UptoEvmScheme } from "@x402/evm/upto/client";
 import { createx402MCPClient } from "@x402/mcp";
 import { privateKeyToAccount } from "viem/accounts";
 import OpenAI from "openai";
@@ -62,10 +61,7 @@ export async function main(): Promise<void> {
   const mcpClient = createx402MCPClient({
     name: "openai-chatbot",
     version: "1.0.0",
-    schemes: [
-      { network: "eip155:84532", client: new ExactEvmScheme(evmSigner) },
-      { network: "eip155:84532", client: new UptoEvmScheme(evmSigner) },
-    ],
+    schemes: [{ network: "eip155:84532", client: new ExactEvmScheme(evmSigner) }],
     autoPayment: true,
     onPaymentRequested: async context => {
       const price = context.paymentRequired.accepts[0];
