@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@x402/core": "workspace:~",
-    "@hiero-ledger/sdk": "2.80.0"
+    "@hiero-ledger/sdk": "2.81.0"
   },
   "exports": {
     ".": {
