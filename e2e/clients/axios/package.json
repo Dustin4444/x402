@@ -30,7 +30,7 @@
     "@x402/tvm": "workspace:*",
     "axios": "1.12.2",
     "dotenv": "^16.4.7",
-    "viem": "^2.48.11"
+    "viem": "^2.54.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
