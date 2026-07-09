@@ -1,7 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { paymentMiddleware } from "x402/hono";
+import { paymentMiddleware } from "../packages/typescript/x402/src/hono/index.js";
 
 const app = new Hono();
 const port = 4021;

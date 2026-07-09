@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { paymentMiddleware } from "x402/hono";
+import { paymentMiddleware } from "../packages/typescript/x402/src/hono/index.js";
 import { Hono } from "hono";
 import { Address } from "viem";
-import { Resource } from "x402/types";
+import type { Resource } from "../packages/typescript/x402/src/types/index.js";
 
 export async function middleware(request: NextRequest) {
   if (
