@@ -21,6 +21,7 @@
     "@keetanetwork/keetanet-client": "^0.18.1",
     "@scure/base": "^1.2.6",
     "@solana/kit": "^6.1.0",
+    "@vercel/analytics": "^1.4.3",
     "@vercel/functions": "^2.2.8",
     "@x402/aptos": "workspace:*",
     "@x402/avm": "workspace:*",
