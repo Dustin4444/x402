@@ -28,7 +28,7 @@
     "@x402/stellar": "workspace:*",
     "@x402/svm": "workspace:*",
     "@x402/tvm": "workspace:*",
-    "axios": "1.12.2",
+    "axios": "1.16.0",
     "dotenv": "^16.4.7",
     "viem": "^2.48.11"
   },
