@@ -22,7 +22,7 @@
   "repository": "https://github.com/x402-foundation/x402",
   "description": "x402 Payment Protocol",
   "devDependencies": {
-    "@coinbase/onchainkit": "^0.38.14",
+    "@coinbase/onchainkit": "^1.0.0",
     "@craftamap/esbuild-plugin-html": "^0.9.0",
     "@eslint/js": "^9.24.0",
     "@types/node": "^22.13.4",
@@ -30,7 +30,7 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
-    "@wagmi/connectors": "^5.8.1",
+    "@wagmi/connectors": "^7.0.0",
     "@wagmi/core": "^2.17.1",
     "buffer": "^6.0.3",
     "esbuild": "^0.27.2",
@@ -45,9 +45,9 @@
     "tsx": "^4.21.0",
     "typescript": "^5.7.3",
     "viem": "^2.48.11",
-    "vite": "^6.2.6",
+    "vite": "^6.4.3",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.5"
+    "vitest": "^3.2.6"
   },
   "dependencies": {
     "@scure/base": "^1.2.6",
@@ -61,7 +61,7 @@
     "@wallet-standard/base": "^1.1.0",
     "@wallet-standard/features": "^1.1.0",
     "viem": "^2.48.11",
-    "wagmi": "^2.15.6",
+    "wagmi": "^3.0.0",
     "zod": "^3.24.2"
   },
   "exports": {
